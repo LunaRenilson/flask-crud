@@ -20,10 +20,36 @@ flask-crud-docker/
 
 ```json
 [
-  {
-    "id": 1,
-    "name": "Item exemplo"
-  }
+    {
+        "id": 1,
+        "name": "Celular",
+        "price": 1200.00,
+        "description": "Smartphone with 128GB storage and 6GB RAM"
+    },
+    {
+        "id": 2,
+        "name": "Laptop",
+        "price": 2500.00,
+        "description": "15-inch laptop with Intel i7 processor and 16GB RAM"
+    },
+    {
+        "id": 3,
+        "name": "Tablet",
+        "price": 800.00,
+        "description": "10-inch tablet with 64GB storage and Wi-Fi connectivity"
+    },
+    {
+        "id": 4,
+        "name": "Smartwatch",
+        "price": 300.00,
+        "description": "Smartwatch with heart rate monitor and GPS"
+    },
+    {
+        "id": 5,
+        "name": "Headphones",
+        "price": 150.00,
+        "description": "Wireless headphones with noise cancellation"
+    }
 ]
 ```
 
