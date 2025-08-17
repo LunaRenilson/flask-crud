@@ -77,11 +77,11 @@ def write_data(data):
 
 
 # Rotas de recuperação de dados
-@app.route("/items", methods=["GET"])
+@app.route("/products", methods=["GET"])
 def get_items():
     return jsonify(read_data())
 
-@app.route("/items/<int:item_id>", methods=["GET"])
+@app.route("/products/<int:item_id>", methods=["GET"])
 def get_item(item_id):
     data = read_data()
     item = next((i for i in data if i["id"] == item_id), None)
@@ -89,7 +89,7 @@ def get_item(item_id):
 
 
 # Rotas de inserção de dados
-@app.route("/items", methods=["POST"])
+@app.route("/products", methods=["POST"])
 def create_item():
     data = read_data()
     new_item = request.json
@@ -100,7 +100,7 @@ def create_item():
 
 
 # Rotas de modificação de dados
-@app.route("/items/<int:item_id>", methods=["PUT"])
+@app.route("/products/<int:item_id>", methods=["PUT"])
 def update_item(item_id):
     data = read_data()
     item = next((i for i in data if i["id"] == item_id), None)
@@ -112,7 +112,7 @@ def update_item(item_id):
 
 
 # Rotas de remoção
-@app.route("/items/<int:item_id>", methods=["DELETE"])
+@app.route("/products/<int:item_id>", methods=["DELETE"])
 def delete_item(item_id):
     data = read_data()
     new_data = [i for i in data if i["id"] != item_id]
