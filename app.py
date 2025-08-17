@@ -19,7 +19,6 @@ def write_data(data):
 
 
 @app.route("/products", methods=["GET"])
-
 def get_products():
     """Get all products."""
     return jsonify(read_data())
