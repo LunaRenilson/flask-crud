@@ -39,6 +39,6 @@ def delete_item(item_id):
 if __name__ == "__main__":
     # Exemplos de uso
     
-    # list_items()
+    list_items()
     # create_item("Fancy Hat", 800)
     # delete_item(7)
