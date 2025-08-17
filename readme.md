@@ -49,6 +49,8 @@ def write_data(data):
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=2)
 
+
+# Rotas de recuperação de dados
 @app.route("/items", methods=["GET"])
 def get_items():
     return jsonify(read_data())
@@ -59,6 +61,8 @@ def get_item(item_id):
     item = next((i for i in data if i["id"] == item_id), None)
     return jsonify(item) if item else ("Item not found", 404)
 
+
+# Rotas de inserção de dados
 @app.route("/items", methods=["POST"])
 def create_item():
     data = read_data()
@@ -68,6 +72,8 @@ def create_item():
     write_data(data)
     return jsonify(new_item), 201
 
+
+# Rotas de modificação de dados
 @app.route("/items/<int:item_id>", methods=["PUT"])
 def update_item(item_id):
     data = read_data()
@@ -78,6 +84,8 @@ def update_item(item_id):
     write_data(data)
     return jsonify(item)
 
+
+# Rotas de remoção
 @app.route("/items/<int:item_id>", methods=["DELETE"])
 def delete_item(item_id):
     data = read_data()
@@ -89,100 +97,3 @@ def delete_item(item_id):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
-```
-
----
-
-## 3. Dependências (`requirements.txt`)
-
-```
-flask==3.0.3
-```
-
----
-
-## 4. Criar o `Dockerfile`
-
-```dockerfile
-FROM python:3.11-slim
-
-WORKDIR /app
-
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-
-EXPOSE 5000
-
-CMD ["python", "app.py"]
-```
-
----
-
-## 5. Build e execução com Docker
-
-### Build da imagem:
-```bash
-docker build -t flask-crud .
-```
-
-### Rodar o container:
-```bash
-docker run -p 5000:5000 flask-crud
-```
-
----
-
-## 6. Testando as rotas
-
-- **Listar itens**
-  ```http
-  GET http://localhost:5000/items
-  ```
-
-- **Criar item**
-  ```http
-  POST http://localhost:5000/items
-  Content-Type: application/json
-
-  {
-    "name": "Novo item"
-  }
-  ```
-
-- **Atualizar item**
-  ```http
-  PUT http://localhost:5000/items/1
-  Content-Type: application/json
-
-  {
-    "name": "Item atualizado"
-  }
-  ```
-
-- **Excluir item**
-  ```http
-  DELETE http://localhost:5000/items/1
-  ```
-
----
-
-## 7. Depuração de erros comuns
-
-Se aparecer o erro **`ModuleNotFoundError: No module named flask`**:
-
-1. Certifique-se de que o `requirements.txt` está correto.
-2. Refaça o build sem cache:
-   ```bash
-   docker build --no-cache -t flask-crud .
-   ```
-3. Verifique dentro do container se o Flask foi instalado:
-   ```bash
-   docker run -it flask-crud bash
-   pip list | grep Flask
-   ```
-
-Se não aparecer nada, significa que o `pip install` não rodou corretamente.
-
----
